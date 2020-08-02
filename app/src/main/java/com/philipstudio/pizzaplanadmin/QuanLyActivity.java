@@ -42,13 +42,15 @@ public class QuanLyActivity extends AppCompatActivity {
                     return new QuanLyMenuFragment();
                 case 1 :
                     return new QuanLyMatKhauFragment();
+                case 2 :
+                    return new QuanLyChiNhanhFragment();
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
          @Nullable
@@ -57,6 +59,7 @@ public class QuanLyActivity extends AppCompatActivity {
              switch (position){
                  case 0 : return "Quản lý Menu";
                  case 1 : return "Quản lý mật khẩu";
+                 case 2 : return "Các chi nhánh";
              }
              return null;
          }
