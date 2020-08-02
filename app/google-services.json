@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "986936770335",
+    "firebase_url": "https://pizza-plan-d435f.firebaseio.com",
+    "project_id": "pizza-plan-d435f",
+    "storage_bucket": "pizza-plan-d435f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986936770335:android:02a6a083f8b8cb0ea07a2a",
+        "android_client_info": {
+          "package_name": "com.philipstudio.pizzaplan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986936770335-phc67btanqo41n26qpvhqlpqqi9trrn4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCncGN8PWCBfVGMRMyEYXxuqUre_2XHVhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986936770335-phc67btanqo41n26qpvhqlpqqi9trrn4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986936770335:android:df423bca6efecce2a07a2a",
+        "android_client_info": {
+          "package_name": "com.philipstudio.pizzaplanadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986936770335-phc67btanqo41n26qpvhqlpqqi9trrn4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCncGN8PWCBfVGMRMyEYXxuqUre_2XHVhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986936770335-phc67btanqo41n26qpvhqlpqqi9trrn4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

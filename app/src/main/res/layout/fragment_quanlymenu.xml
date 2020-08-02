@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/edittext_tenmonan"
+        android:layout_margin="5dp"
+        android:hint="Nhập tên món ăn mới"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:lineSpacingExtra="5dp"
+        android:id="@+id/edittext_nguyenlieu"
+        android:layout_margin="5dp"
+        android:hint="Nhập nguyên liệu cho món ăn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageview_anh"
+            android:background="@color/colorAccent"
+            android:layout_width="120dp"
+            android:layout_height="120dp"/>
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
+            <EditText
+                android:inputType="number"
+                android:id="@+id/edittext_giatien"
+                android:layout_marginStart="5dp"
+                android:hint="Nhập tên giá tiền món ăn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="5dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/button_them"
+                    android:text="Thêm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/button_sua"
+                    android:text="Sửa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/button_xoa"
+                    android:text="Xoá"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_marginStart="5dp"
+        android:textColor="#000"
+        android:textSize="23sp"
+        android:textAllCaps="true"
+        android:text="Danh sách các món ăn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_danhsach_monan"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
