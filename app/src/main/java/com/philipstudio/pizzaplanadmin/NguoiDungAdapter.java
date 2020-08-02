@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -23,9 +21,6 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.View
     Context context;
 
     OnNguoiDungItemClickListener onNguoiDungItemClickListener;
-
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference dataRef;
 
     public NguoiDungAdapter(ArrayList<NguoiDung> arrayList, Context context) {
         this.arrayList = arrayList;
@@ -44,7 +39,7 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.txtEmail.setText(arrayList.get(position).getEmailorPhoneNumber());
         holder.txtTen.setText(arrayList.get(position).getTennguoidung());
         holder.txtMatkhau.setText(arrayList.get(position).getMatkhau());
@@ -54,6 +49,7 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.View
             @Override
             public void onClick(View v) {
                 if (onNguoiDungItemClickListener != null){
+                    onNguoiDungItemClickListener.onItemClick(position);
                 }
             }
         });
@@ -79,16 +75,6 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.View
             txtMatkhau = itemView.findViewById(R.id.item_textview_password);
             btnSua = itemView.findViewById(R.id.button_sua);
             btnXoa = itemView.findViewById(R.id.button_xoa);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (onNguoiDungItemClickListener != null){
-                        onNguoiDungItemClickListener.onItemClick(position);
-                    }
-                }
-            });
         }
     }
 
