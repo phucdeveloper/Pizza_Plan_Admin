@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -33,7 +35,8 @@ public class QuanLyChiNhanhFragment extends Fragment implements OnMapReadyCallba
 
     @Override
     public void onMapClick(LatLng latLng) {
-        showMarker(latLng, "Current Marker" + latLng.latitude + ", " + latLng.longitude);
+  //      showMarker(latLng, "Current Marker" + latLng.latitude + ", " + latLng.longitude);
+        showMarker(latLng, "text");
     }
 
     @Override
@@ -50,9 +53,13 @@ public class QuanLyChiNhanhFragment extends Fragment implements OnMapReadyCallba
     }
 
     private void showMarker(LatLng latLng, String description){
-        mGoogleMap.clear();
-        MarkerOptions options = new MarkerOptions().position(latLng);
-        options.title(description)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_baseline_place));
+//        mGoogleMap.clear();
+//        MarkerOptions options = new MarkerOptions().position(latLng);
+//        options.title(description)
+//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_baseline_place));
+//        mGoogleMap.addMarker(options);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18.0f);
+        mGoogleMap.animateCamera(cameraUpdate);
+
     }
 }
