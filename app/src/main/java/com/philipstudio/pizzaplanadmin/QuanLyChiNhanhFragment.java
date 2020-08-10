@@ -54,10 +54,8 @@ public class QuanLyChiNhanhFragment extends Fragment implements OnMapReadyCallba
     }
 
     private void showMarker(LatLng latLng, String description){
-        mGoogleMap.clear();
         MarkerOptions options = new MarkerOptions().position(latLng);
-        options.title(description)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_baseline_place));
+        options.title(description);
         mGoogleMap.addMarker(options);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18.0f);
         mGoogleMap.animateCamera(cameraUpdate);
