@@ -2,6 +2,7 @@ package com.philipstudio.pizzaplanadmin.fragment;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -11,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -73,6 +76,11 @@ public class QuanLyNguoiDungFragment extends Fragment {
                         intent.putExtra("idNguoiDung", text);
                         startActivity(intent);
                     }
+
+                    @Override
+                    public void onClickButtonXoa(String text) {
+                        showAlertDialog(getContext(), text);
+                    }
                 });
             }
 
@@ -116,5 +124,30 @@ public class QuanLyNguoiDungFragment extends Fragment {
         });
 
         dialog.show();
+    }
+
+    private void showAlertDialog(Context context, final String text){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Thông báo");
+        builder.setMessage("Bạn có chắc chắn muốn xoá tài khoản này không ?");
+        builder.setPositiveButton("Có, đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                firebaseDatabase = FirebaseDatabase.getInstance();
+                dataRef = firebaseDatabase.getReference().child("NguoiDung");
+                dataRef.child(text).removeValue();
+                Toast.makeText(getContext(), "Tài khoản này đã bị xoá", Toast.LENGTH_SHORT);
+            }
+        });
+
+        builder.setNegativeButton("Không, hủy bỏ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

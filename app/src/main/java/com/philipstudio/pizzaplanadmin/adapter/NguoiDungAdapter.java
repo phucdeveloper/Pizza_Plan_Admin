@@ -65,6 +65,15 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.View
             }
         });
 
+        holder.btnXoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onNguoiDungItemClickListener != null){
+                    onNguoiDungItemClickListener.onClickButtonXoa(arrayList.get(position).getIdNguoiDung());
+                }
+            }
+        });
+
     }
 
     @Override
@@ -94,5 +103,6 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.View
     public interface OnNguoiDungItemClickListener{
         void onClickButtonSuaMatKhau(int position);
         void onClickButtonXemDanhSachHoaDon(String text);
+        void onClickButtonXoa(String text);
     }
 }
