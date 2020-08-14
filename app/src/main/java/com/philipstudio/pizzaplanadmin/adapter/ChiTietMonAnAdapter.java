@@ -1,4 +1,4 @@
-package com.philipstudio.pizzaplanadmin;
+package com.philipstudio.pizzaplanadmin.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,17 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.philipstudio.pizzaplanadmin.R;
+import com.philipstudio.pizzaplanadmin.model.MonAn;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
-public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.ViewHolder> {
+public class ChiTietMonAnAdapter extends RecyclerView.Adapter<ChiTietMonAnAdapter.ViewHolder> {
 
     ArrayList<MonAn> arrayList;
     Context context;
 
     OnItemClicklistener onItemClicklistener;
 
-    public MonAnAdapter(ArrayList<MonAn> arrayList, Context context) {
+    public ChiTietMonAnAdapter(ArrayList<MonAn> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -41,7 +45,10 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtTenmon.setText(arrayList.get(position).getTenMonAn());
         holder.txtNguyelieu.setText(arrayList.get(position).getNguyenLieu());
-        holder.txtGiatien.setText(String.valueOf(arrayList.get(position).getGia()));
+        NumberFormat formatter = new DecimalFormat("#,###");
+        double giatien = arrayList.get(position).getGia();
+        String formattedGiatien = formatter.format(giatien);
+        holder.txtGiatien.setText(formattedGiatien + " đồng");
         Glide.with(context).load(arrayList.get(position).getAnh()).into(holder.imgAnh);
     }
 

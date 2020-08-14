@@ -1,7 +1,8 @@
-package com.philipstudio.pizzaplanadmin;
+package com.philipstudio.pizzaplanadmin.fragment;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,10 +24,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.philipstudio.pizzaplanadmin.R;
+import com.philipstudio.pizzaplanadmin.adapter.NguoiDungAdapter;
+import com.philipstudio.pizzaplanadmin.model.NguoiDung;
+import com.philipstudio.pizzaplanadmin.view.HoaDonActivity;
 
 import java.util.ArrayList;
 
-public class QuanLyMatKhauFragment extends Fragment {
+public class QuanLyNguoiDungFragment extends Fragment {
 
     RecyclerView recyclerView;
 
@@ -36,7 +41,7 @@ public class QuanLyMatKhauFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_quanlymatkhau, container, false);
+        View view = inflater.inflate(R.layout.fragment_quanlynguoidung, container, false);
         recyclerView = view.findViewById(R.id.recyclerview_danhsach_nguoidung);
         recyclerView.setHasFixedSize(true);
 
@@ -57,9 +62,16 @@ public class QuanLyMatKhauFragment extends Fragment {
 
                 adapter.setOnNguoiDungItemClickListener(new NguoiDungAdapter.OnNguoiDungItemClickListener() {
                     @Override
-                    public void onItemClick(int position) {
+                    public void onClickButtonSuaMatKhau(int position) {
                         NguoiDung nguoiDung = arrayList.get(position);
                         showDialog(getContext(), nguoiDung);
+                    }
+
+                    @Override
+                    public void onClickButtonXemDanhSachHoaDon(String text) {
+                        Intent intent = new Intent(getContext(), HoaDonActivity.class);
+                        intent.putExtra("idNguoiDung", text);
+                        startActivity(intent);
                     }
                 });
             }

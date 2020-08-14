@@ -1,4 +1,4 @@
-package com.philipstudio.pizzaplanadmin;
+package com.philipstudio.pizzaplanadmin.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

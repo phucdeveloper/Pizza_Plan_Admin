@@ -1,7 +1,6 @@
-package com.philipstudio.pizzaplanadmin;
+package com.philipstudio.pizzaplanadmin.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.philipstudio.pizzaplanadmin.R;
+import com.philipstudio.pizzaplanadmin.model.DonHang;
+
 import java.util.ArrayList;
 
 public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHolder> {
@@ -18,15 +20,15 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
     ArrayList<DonHang> arrayList;
     Context context;
 
-    OnItemClickLichSuThanhToanListener onItemClickLichSuThanhToanListener;
+    OnItemClickDonHangListener onItemClickDonHangListener;
 
     public DonHangAdapter(ArrayList<DonHang> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
 
-    public void setOnItemClickLichSuThanhToanListener(OnItemClickLichSuThanhToanListener onItemClickLichSuThanhToanListener) {
-        this.onItemClickLichSuThanhToanListener = onItemClickLichSuThanhToanListener;
+    public void setOnItemClickDonHangListener(OnItemClickDonHangListener onItemClickDonHangListener) {
+        this.onItemClickDonHangListener = onItemClickDonHangListener;
     }
 
     @NonNull
@@ -45,8 +47,8 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
         holder.txtChitiet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onItemClickLichSuThanhToanListener != null){
-                    onItemClickLichSuThanhToanListener.OnItemClick(context, position);
+                if (onItemClickDonHangListener != null){
+                    onItemClickDonHangListener.OnItemClick(context, position);
                 }
             }
         });
@@ -73,7 +75,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
         }
     }
 
-    public interface OnItemClickLichSuThanhToanListener{
+    public interface OnItemClickDonHangListener{
         void OnItemClick(Context context, int position);
     }
 }

@@ -1,4 +1,4 @@
-package com.philipstudio.pizzaplanadmin;
+package com.philipstudio.pizzaplanadmin.view;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -7,18 +7,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
+import com.philipstudio.pizzaplanadmin.R;
+import com.philipstudio.pizzaplanadmin.fragment.QuanLyChiNhanhFragment;
+import com.philipstudio.pizzaplanadmin.fragment.QuanLyMenuFragment;
+import com.philipstudio.pizzaplanadmin.fragment.QuanLyNguoiDungFragment;
 
 public class QuanLyActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     androidx.viewpager.widget.ViewPager viewPager;
-    Button btnHoaDon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +26,10 @@ public class QuanLyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quanly);
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager_container);
-        btnHoaDon = findViewById(R.id.button_hoadon);
 
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
-        btnHoaDon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(QuanLyActivity.this, HoaDonActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
      class PagerAdapter extends FragmentPagerAdapter{
@@ -55,7 +45,7 @@ public class QuanLyActivity extends AppCompatActivity {
                 case 0 :
                     return new QuanLyMenuFragment();
                 case 1 :
-                    return new QuanLyMatKhauFragment();
+                    return new QuanLyNguoiDungFragment();
                 case 2 :
                     return new QuanLyChiNhanhFragment();
             }
@@ -72,7 +62,7 @@ public class QuanLyActivity extends AppCompatActivity {
          public CharSequence getPageTitle(int position) {
              switch (position){
                  case 0 : return "Menu";
-                 case 1 : return "Mật khẩu";
+                 case 1 : return "Người dùng";
                  case 2 : return "Chi nhánh";
              }
              return null;

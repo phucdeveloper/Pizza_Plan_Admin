@@ -1,4 +1,4 @@
-package com.philipstudio.pizzaplanadmin;
+package com.philipstudio.pizzaplanadmin.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.philipstudio.pizzaplanadmin.R;
+import com.philipstudio.pizzaplanadmin.model.NguoiDung;
 
 import java.util.ArrayList;
 
@@ -49,10 +51,20 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.View
             @Override
             public void onClick(View v) {
                 if (onNguoiDungItemClickListener != null){
-                    onNguoiDungItemClickListener.onItemClick(position);
+                    onNguoiDungItemClickListener.onClickButtonSuaMatKhau(position);
                 }
             }
         });
+
+        holder.btnXemDanhSachHoaDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onNguoiDungItemClickListener != null){
+                    onNguoiDungItemClickListener.onClickButtonXemDanhSachHoaDon(arrayList.get(position).getIdNguoiDung());
+                }
+            }
+        });
+
     }
 
     @Override
@@ -64,7 +76,7 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.View
 
         ImageView imgAnh;
         TextView txtEmail, txtTen, txtMatkhau;
-        Button btnSua, btnXoa;
+        Button btnSua, btnXoa, btnXemDanhSachHoaDon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,10 +87,12 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.View
             txtMatkhau = itemView.findViewById(R.id.item_textview_password);
             btnSua = itemView.findViewById(R.id.button_sua);
             btnXoa = itemView.findViewById(R.id.button_xoa);
+            btnXemDanhSachHoaDon = itemView.findViewById(R.id.button_xem_danh_sach_hoa_don);
         }
     }
 
     public interface OnNguoiDungItemClickListener{
-        void onItemClick(int position);
+        void onClickButtonSuaMatKhau(int position);
+        void onClickButtonXemDanhSachHoaDon(String text);
     }
 }

@@ -1,4 +1,4 @@
-package com.philipstudio.pizzaplanadmin;
+package com.philipstudio.pizzaplanadmin.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -28,6 +28,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.philipstudio.pizzaplanadmin.R;
+import com.philipstudio.pizzaplanadmin.adapter.ChiTietMonAnAdapter;
+import com.philipstudio.pizzaplanadmin.model.MonAn;
 
 import java.util.ArrayList;
 
@@ -46,7 +49,7 @@ public class QuanLyMenuFragment extends Fragment {
     static final int REQUEST_CODE = 123;
     Uri uri;
     ArrayList<MonAn> arrayList = new ArrayList<>();
-    MonAnAdapter anAdapter;
+    ChiTietMonAnAdapter anAdapter;
     int vitri;
     String linkAnh;
     double gia;
@@ -64,10 +67,10 @@ public class QuanLyMenuFragment extends Fragment {
         if (intent != null){
             arrayList = intent.getParcelableArrayListExtra("dataListMonAn");
             if (arrayList != null){
-                anAdapter = new MonAnAdapter(arrayList, getContext());
+                anAdapter = new ChiTietMonAnAdapter(arrayList, getContext());
                 recyclerView.setAdapter(anAdapter);
 
-                anAdapter.setOnItemClicklistener(new MonAnAdapter.OnItemClicklistener() {
+                anAdapter.setOnItemClicklistener(new ChiTietMonAnAdapter.OnItemClicklistener() {
                     @Override
                     public void onItemClick(int position, MonAn monAn) {
                         edtTenmonan.setText(monAn.getTenMonAn());

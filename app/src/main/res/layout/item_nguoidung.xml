@@ -89,4 +89,10 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/button_xem_danh_sach_hoa_don"
+        android:text="xem danh sách hoá đơn"
+        android:layout_below="@id/item_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

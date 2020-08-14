@@ -1,4 +1,4 @@
-package com.philipstudio.pizzaplanadmin;
+package com.philipstudio.pizzaplanadmin.view;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -10,6 +10,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.philipstudio.pizzaplanadmin.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 

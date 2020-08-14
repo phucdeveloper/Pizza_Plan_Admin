@@ -1,4 +1,4 @@
-package com.philipstudio.pizzaplanadmin;
+package com.philipstudio.pizzaplanadmin.model;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
