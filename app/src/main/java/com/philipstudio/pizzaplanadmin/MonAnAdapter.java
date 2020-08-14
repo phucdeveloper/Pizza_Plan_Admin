@@ -33,7 +33,7 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_monan, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chitiet_monan, parent, false);
         return new ViewHolder(view);
     }
 

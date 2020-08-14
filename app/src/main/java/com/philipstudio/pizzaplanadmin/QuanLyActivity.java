@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -15,16 +18,27 @@ public class QuanLyActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     androidx.viewpager.widget.ViewPager viewPager;
+    Button btnHoaDon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quanly);
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager_container);
+        btnHoaDon = findViewById(R.id.button_hoadon);
 
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        btnHoaDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuanLyActivity.this, HoaDonActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
