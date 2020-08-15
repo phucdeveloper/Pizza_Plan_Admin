@@ -138,7 +138,7 @@ public class QuanLyMenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(edtTenmonan.getText().toString())|| TextUtils.isEmpty(edtGiatien.getText().toString())
-                || TextUtils.isEmpty(edtNguyenlieu.getText().toString()) || uri == null){
+                || TextUtils.isEmpty(edtNguyenlieu.getText().toString())){
                     Toast.makeText(getContext(), "Bạn chưa chọn item để xoá", Toast.LENGTH_SHORT).show();
                 }
                 else{

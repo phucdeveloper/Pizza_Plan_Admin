@@ -135,7 +135,13 @@ public class QuanLyNguoiDungFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 dataRef = firebaseDatabase.getReference().child("NguoiDung");
-                dataRef.child(text).removeValue();
+              //  dataRef.child(text).removeValue();
+                dataRef.removeValue(new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                        
+                    }
+                });
                 Toast.makeText(getContext(), "Tài khoản này đã bị xoá", Toast.LENGTH_SHORT);
             }
         });
