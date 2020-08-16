@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.philipstudio.pizzaplanadmin.R;
 import com.philipstudio.pizzaplanadmin.adapter.ChiTietMonAnAdapter;
+import com.philipstudio.pizzaplanadmin.adapter.MonAnAdapter;
 import com.philipstudio.pizzaplanadmin.model.MonAn;
 
 import java.util.ArrayList;
@@ -64,9 +65,9 @@ public class QuanLyMenuFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
 
         Intent intent = getActivity().getIntent();
-        if (intent != null){
+        if (intent != null) {
             arrayList = intent.getParcelableArrayListExtra("dataListMonAn");
-            if (arrayList != null){
+            if (arrayList != null) {
                 anAdapter = new ChiTietMonAnAdapter(arrayList, getContext());
                 recyclerView.setAdapter(anAdapter);
 
@@ -96,14 +97,13 @@ public class QuanLyMenuFragment extends Fragment {
                 String id = String.valueOf(System.currentTimeMillis());
                 String tenmonan = edtTenmonan.getText().toString();
                 String data = edtGiatien.getText().toString();
-                if (!TextUtils.isEmpty(data)){
+                if (!TextUtils.isEmpty(data)) {
                     gia = Double.parseDouble(data);
                 }
                 String nguyenlieu = edtNguyenlieu.getText().toString();
-                if (!(TextUtils.isEmpty(tenmonan) || TextUtils.isEmpty(nguyenlieu)&&uri != null)){
+                if (!(TextUtils.isEmpty(tenmonan) || TextUtils.isEmpty(nguyenlieu) && uri != null)) {
                     themAnhVaoFirebaseStorage(id, tenmonan, uri, nguyenlieu, gia);
-                }
-                else{
+                } else {
                     Toast.makeText(getContext(), "Dữ liệu thêm vào còn đang rỗng", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -115,33 +115,31 @@ public class QuanLyMenuFragment extends Fragment {
                 MonAn monAn = arrayList.get(vitri);
                 String ten = edtTenmonan.getText().toString();
                 String data = edtGiatien.getText().toString();
-                if (!TextUtils.isEmpty(data)){
-                   gia = Double.parseDouble(data);
+                if (!TextUtils.isEmpty(data)) {
+                    gia = Double.parseDouble(data);
                 }
-
                 String nguyenlieu = edtNguyenlieu.getText().toString();
-                if (uri != null){
+                if (uri != null) {
                     themAnhVaoFirebaseStorage(uri);
                 }
 
-                if (!(TextUtils.isEmpty(data) || TextUtils.isEmpty(nguyenlieu))){
+                if (!TextUtils.isEmpty(linkAnh)) {
                     suaMonAn(monAn.getIdMonAn(), ten, nguyenlieu, gia, linkAnh);
-                }
-                else{
+                } else if (!(TextUtils.isEmpty(data) || TextUtils.isEmpty(nguyenlieu) || TextUtils.isEmpty(ten))) {
+                    suaMonAn(monAn.getIdMonAn(), ten, nguyenlieu, gia);
+                } else {
                     Toast.makeText(getContext(), "Bạn không có dữ liệu để cập nhật", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(edtTenmonan.getText().toString())|| TextUtils.isEmpty(edtGiatien.getText().toString())
-                || TextUtils.isEmpty(edtNguyenlieu.getText().toString())){
+                if (TextUtils.isEmpty(edtTenmonan.getText().toString()) || TextUtils.isEmpty(edtGiatien.getText().toString())
+                        || TextUtils.isEmpty(edtNguyenlieu.getText().toString())) {
                     Toast.makeText(getContext(), "Bạn chưa chọn item để xoá", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     MonAn monAn = arrayList.get(vitri);
                     xoaMonAn(monAn);
                 }
@@ -151,14 +149,14 @@ public class QuanLyMenuFragment extends Fragment {
         return view;
     }
 
-    private void moThuVienChonAnh(){
+    private void moThuVienChonAnh() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, REQUEST_CODE);
     }
 
-    private void themAnhVaoFirebaseStorage(final String id, final String tenmonan, Uri uri, final String nguyenlieu, final double giatien){
+    private void themAnhVaoFirebaseStorage(final String id, final String tenmonan, Uri uri, final String nguyenlieu, final double giatien) {
         firebaseStorage = FirebaseStorage.getInstance();
         stoRef = firebaseStorage.getReference().child("anh_monan");
         final StorageReference imageFilePath = stoRef.child(uri.getLastPathSegment());
@@ -178,7 +176,7 @@ public class QuanLyMenuFragment extends Fragment {
         });
     }
 
-    private void themAnhVaoFirebaseStorage(Uri uri){
+    private void themAnhVaoFirebaseStorage(Uri uri) {
         firebaseStorage = FirebaseStorage.getInstance();
         stoRef = firebaseStorage.getReference().child("anh_monan");
         final StorageReference imageFilePath = stoRef.child(uri.getLastPathSegment());
@@ -195,18 +193,24 @@ public class QuanLyMenuFragment extends Fragment {
         });
     }
 
-    private void themMonAn(MonAn monAn){
+    private void themMonAn(MonAn monAn) {
         dataRef.child(monAn.getIdMonAn()).setValue(monAn);
     }
 
-    private void suaMonAn(String id, String str1, String str2, double str3, String str4){
+    private void suaMonAn(String id, String str1, String str2, double str3, String str4) {
         dataRef.child(id).child("tenMonAn").setValue(str1);
         dataRef.child(id).child("nguyenLieu").setValue(str2);
         dataRef.child(id).child("gia").setValue(str3);
         dataRef.child(id).child("anh").setValue(str4);
     }
 
-    private void xoaMonAn(MonAn monAn){
+    private void suaMonAn(String id, String str1, String str2, double str3) {
+        dataRef.child(id).child("tenMonAn").setValue(str1);
+        dataRef.child(id).child("nguyenLieu").setValue(str2);
+        dataRef.child(id).child("gia").setValue(str3);
+    }
+
+    private void xoaMonAn(MonAn monAn) {
         dataRef.child(monAn.getIdMonAn()).removeValue();
     }
 
@@ -214,24 +218,25 @@ public class QuanLyMenuFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == getActivity().RESULT_OK && requestCode == REQUEST_CODE && data != null){
+        if (resultCode == getActivity().RESULT_OK && requestCode == REQUEST_CODE && data != null) {
             uri = data.getData();
             imgAnh.setImageURI(uri);
-//            themAnhVaoFirebaseStorage(uri);
         }
     }
 
-    private void getDanhSachCacMonAn(){
+    private void getDanhSachCacMonAn() {
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<MonAn> arrayList = new ArrayList<>();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     MonAn monAn = dataSnapshot.getValue(MonAn.class);
                     arrayList.add(monAn);
                 }
 
-                anAdapter.notifyItemInserted(arrayList.size() + 1);
+                anAdapter = new ChiTietMonAnAdapter(arrayList, getContext());
+                recyclerView.setAdapter(anAdapter);
+                anAdapter.notifyItemRemoved(arrayList.size() + 1);
             }
 
             @Override
@@ -241,7 +246,7 @@ public class QuanLyMenuFragment extends Fragment {
         });
     }
 
-    private void initView(View v){
+    private void initView(View v) {
         recyclerView = v.findViewById(R.id.recyclerview_danhsach_monan);
         edtTenmonan = v.findViewById(R.id.edittext_tenmonan);
         edtGiatien = v.findViewById(R.id.edittext_giatien);

@@ -9,9 +9,29 @@
     android:layout_height="match_parent"
     tools:context=".view.QuanLyActivity">
     <androidx.appcompat.widget.Toolbar
-        app:title="@string/app_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_centerVertical="true"
+                android:textSize="18sp"
+                android:text="@string/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/button_thongke"
+                android:textAllCaps="false"
+                android:text="Thống kê"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
     <View
         android:background="#706E6E"
         android:layout_width="match_parent"

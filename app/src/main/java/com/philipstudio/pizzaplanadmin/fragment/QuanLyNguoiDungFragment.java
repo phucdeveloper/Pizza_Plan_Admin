@@ -156,4 +156,8 @@ public class QuanLyNguoiDungFragment extends Fragment {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+    public interface OnGetAllUserListener{
+        void onGetAllUser(ArrayList<NguoiDung> nguoiDungs);
+    }
 }
