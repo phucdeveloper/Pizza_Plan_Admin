@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -128,17 +127,12 @@ public class ThongKeActivity extends AppCompatActivity {
             thongKeMonAns.add(new ThongKeMonAn(gioHangs.get(i).getMonAn().getTenMonAn(), dem));
         }
 
-        ArrayList<ThongKeMonAn> arrayList = new ArrayList<>();
         for (int i=0; i<thongKeMonAns.size(); i++){
             for (int j=0; j<thongKeMonAns.size(); j++){
-                if (thongKeMonAns.get(j).getTenMonAn().equals(thongKeMonAns.get(i).getTenMonAn())){
-                    vitri = j;
-                }
-                else{
-                    arrayList.add(thongKeMonAns.get(j));
+                if (thongKeMonAns.get(j).getTenMonAn().equals(thongKeMonAns.get(i).getTenMonAn())) {
+                    thongKeMonAns.remove(thongKeMonAns.get(j));
                 }
             }
-            arrayList.add(thongKeMonAns.get(vitri));
         }
         rVThongKeTheoMonAn.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(ThongKeActivity.this, RecyclerView.VERTICAL, false);
