@@ -11,15 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.philipstudio.pizzaplanadmin.R;
 import com.philipstudio.pizzaplanadmin.model.GioHang;
+import com.philipstudio.pizzaplanadmin.model.ThongKeMonAn;
 
 import java.util.ArrayList;
 
-public class ThongKeTheoMonAnAdapter extends RecyclerView.Adapter<ThongKeTheoMonAnAdapter.ViewHolder>{
+public class ThongKeTheoMonAnAdapter extends RecyclerView.Adapter<ThongKeTheoMonAnAdapter.ViewHolder> {
 
-    ArrayList<GioHang> arrayList;
+    ArrayList<ThongKeMonAn> arrayList;
     Context context;
 
-    public ThongKeTheoMonAnAdapter(ArrayList<GioHang> arrayList, Context context) {
+    public ThongKeTheoMonAnAdapter(ArrayList<ThongKeMonAn> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -33,7 +34,8 @@ public class ThongKeTheoMonAnAdapter extends RecyclerView.Adapter<ThongKeTheoMon
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.txtTenmonan.setText(arrayList.get(position).getTenMonAn());
+        holder.txtSoluong.setText(String.valueOf(arrayList.get(position).getSoluongbanduoc()));
     }
 
     @Override
@@ -41,7 +43,7 @@ public class ThongKeTheoMonAnAdapter extends RecyclerView.Adapter<ThongKeTheoMon
         return arrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtTenmonan, txtSoluong;
 

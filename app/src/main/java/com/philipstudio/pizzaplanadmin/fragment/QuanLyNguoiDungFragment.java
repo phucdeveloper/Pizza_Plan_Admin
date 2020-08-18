@@ -22,12 +22,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import com.philipstudio.pizzaplanadmin.R;
 import com.philipstudio.pizzaplanadmin.adapter.NguoiDungAdapter;
 import com.philipstudio.pizzaplanadmin.model.NguoiDung;
@@ -136,21 +136,20 @@ public class QuanLyNguoiDungFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 dataRef = firebaseDatabase.getReference().child("NguoiDung");
-                dataRef.child(text).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                dataRef.child(text).removeValue(new DatabaseReference.CompletionListener() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        firebaseDatabase = FirebaseDatabase.getInstance();
-                        dataRef = firebaseDatabase.getReference().child("DonHang");
-                        dataRef.child(text).removeValue(new DatabaseReference.CompletionListener() {
+                    public void onComplete(DatabaseError error, DatabaseReference ref) {
+                        ref = firebaseDatabase.getReference().child("DonHang");
+                        ref.child(text).removeValue(new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                                 ref = firebaseDatabase.getReference().child("ChiTietDonHang");
                                 ref.child(text).removeValue();
+                                Toast.makeText(getContext(), "Tài khoản này đã bị xoá", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 });
-                Toast.makeText(getContext(), "Tài khoản này đã bị xoá", Toast.LENGTH_SHORT);
             }
         });
 
@@ -163,9 +162,5 @@ public class QuanLyNguoiDungFragment extends Fragment {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-    }
-
-    public interface OnGetAllUserListener{
-        void onGetAllUser(ArrayList<NguoiDung> nguoiDungs);
     }
 }
