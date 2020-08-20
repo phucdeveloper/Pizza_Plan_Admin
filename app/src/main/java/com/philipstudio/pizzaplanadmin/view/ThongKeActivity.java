@@ -114,7 +114,7 @@ public class ThongKeActivity extends AppCompatActivity {
 
     private void thongKeSoLuongCacMonAnBanDuoc(ArrayList<GioHang> gioHangs){
         ArrayList<ThongKeMonAn> thongKeMonAns = new ArrayList<>();
-        int dem, vitri = 0;
+        int dem;
         for (int i = 0; i < gioHangs.size(); i++) {
             dem = gioHangs.get(i).getSoluong();
             for (int j = 0; j < gioHangs.size(); j++) {
@@ -129,8 +129,10 @@ public class ThongKeActivity extends AppCompatActivity {
 
         for (int i=0; i<thongKeMonAns.size(); i++){
             for (int j=0; j<thongKeMonAns.size(); j++){
-                if (thongKeMonAns.get(j).getTenMonAn().equals(thongKeMonAns.get(i).getTenMonAn())) {
-                    thongKeMonAns.remove(thongKeMonAns.get(j));
+                if (j != i){
+                    if (thongKeMonAns.get(j).getTenMonAn().equals(thongKeMonAns.get(i).getTenMonAn())) {
+                        thongKeMonAns.remove(thongKeMonAns.get(j));
+                    }
                 }
             }
         }
